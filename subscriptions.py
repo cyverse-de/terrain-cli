@@ -13,7 +13,7 @@ def list_plans(args):
     for plan in plans:
         print("{0}:".format(plan["name"]))
         for quota_default in sorted(plan["plan_quota_defaults"], key=lambda qd: qd["resource_type"]["name"]):
-            print("\t{0}: {1}".format(quota_default["resource_type"]["name"], quota_default["quota_value"]))
+            print("    {0}: {1}".format(quota_default["resource_type"]["name"], quota_default["quota_value"]))
 
 def display_subscription(subscription):
     """
@@ -24,10 +24,10 @@ def display_subscription(subscription):
     print("Plan:", subscription["plan"]["name"])
     print("Quotas:")
     for quota in sorted(subscription["quotas"], key=lambda q: q["resource_type"]["name"]):
-        print("\t{0}: {1}".format(quota["resource_type"]["name"], quota["quota"]))
+        print("    {0}: {1}".format(quota["resource_type"]["name"], quota["quota"]))
     print("Usages:")
     for usage in sorted(subscription["usages"], key=lambda u: u["resource_type"]["name"]):
-        print("\t{0}: {1}".format(usage["resource_type"]["name"], usage["usage"]))
+        print("    {0}: {1}".format(usage["resource_type"]["name"], usage["usage"]))
 
 def get_subscription(args):
     """
