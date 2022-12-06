@@ -15,7 +15,10 @@ def parse_args():
         choices=["prod", "qa"],
         default="prod"
     )
-    subparsers = parser.add_subparsers()
+    subparsers = parser.add_subparsers(
+        title="subcommands",
+        description="valid subcommands"
+    )
     subscriptions.add_subparser(subparsers)
     return parser.parse_args()
 

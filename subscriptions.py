@@ -47,7 +47,11 @@ def add_subparser(main_subparsers):
     """
     Adds the subparser for the subscriptions subcommand.
     """
-    parser = main_subparsers.add_parser("subscriptions", aliases=["subscription", "sub", "subs"])
+    parser = main_subparsers.add_parser(
+        "subscriptions",
+        aliases=["subscription", "sub", "subs"],
+        description="subscription operations"
+    )
     subparsers = parser.add_subparsers()
 
     # Lists plans.
