@@ -23,10 +23,12 @@ def display_subscription(subscription):
     print("Expires At:", subscription["effective_end_date"])
     print("Plan:", subscription["plan"]["name"])
     print("Quotas:")
-    for quota in sorted(subscription["quotas"], key=lambda q: q["resource_type"]["name"]):
+    quotas = subscription["quotas"] if "quotas" in subscription else []
+    for quota in sorted(quotas, key=lambda q: q["resource_type"]["name"]):
         print("    {0}: {1}".format(quota["resource_type"]["name"], quota["quota"]))
     print("Usages:")
-    for usage in sorted(subscription["usages"], key=lambda u: u["resource_type"]["name"]):
+    usages = subscription["usages"] if "usages" in subscription else []
+    for usage in sorted(usages, key=lambda u: u["resource_type"]["name"]):
         print("    {0}: {1}".format(usage["resource_type"]["name"], usage["usage"]))
 
 def get_subscription(args):
