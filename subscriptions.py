@@ -43,15 +43,22 @@ def get_subscription(args):
             return
     display_subscription(client.get_subscription(args.env))
 
-def add_subparser(main_subparsers):
+def list_module_subcommands():
     """
-    Adds the subparser for the subscriptions subcommand.
+    Returns a list of subcommands that are used to access thismodule.
     """
-    parser = main_subparsers.add_parser(
-        "subscriptions",
-        aliases=["subscription", "sub", "subs"],
-        description="subscription operations"
-    )
+    return ["subscriptions", "subscription", "sub", "subs"]
+
+def get_module_description():
+    """
+    Returns a brief description of the module.
+    """
+    return "subscription operations"
+
+def config_argument_parser(parser):
+    """
+    Configures the argument parser for the module.
+    """
     subparsers = parser.add_subparsers()
 
     # Lists plans.
