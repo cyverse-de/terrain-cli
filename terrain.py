@@ -34,7 +34,7 @@ def parse_args():
         choices=["prod", "qa"],
         default="prod"
     )
-    subparsers = parser.add_subparsers(metavar="subcommand")
+    subparsers = parser.add_subparsers(metavar="subcommand", dest="command")
 
     # Add subparsers and keep a record of the available subcommands.
     add_subparser_for_module(subparsers, subscriptions)

@@ -4,6 +4,7 @@ import argparse
 import client
 import jwt
 import pprint
+import sys
 
 def list_plans(args):
     """
@@ -57,6 +58,39 @@ def get_module_description():
     """
     return "subscription operations"
 
+def display_module_help(args):
+    """
+    Displays the help for the module.
+    """
+    prog = sys.argv[0]
+
+    print("Terrain Subscriptions Operations")
+    print()
+    print("This command provides additional subcommands to get and update subscription")
+    print("information for users. The available subcommands are:")
+    print()
+    print(prog, args.command, "list-plans")
+    print(prog, args.command, "plans")
+    print(prog, args.command, "lp")
+    print()
+    print("Summarizes each of the available CyVerse subscription plans.")
+    print()
+    print(prog, args.command, "get")
+    print(prog, args.command, "get -u username")
+    print()
+    print("Gets information about the current subscription. If the username is not provided")
+    print("or happens to be the username of the currently authenticated user then admin")
+    print("access is not required and the user's current subscription is displayed.")
+    print()
+    print("If the username is provided and is not the username of the currently authenticated")
+    print("user then admin access is required. If the authenticated user has admin access then")
+    print("information about the currently active subscription of the specified user will be")
+    print("displayed.")
+    print()
+    print(prog, args.command, "help")
+    print()
+    print("Display this help message.")
+
 def config_argument_parser(parser):
     """
     Configures the argument parser for the module.
@@ -71,3 +105,7 @@ def config_argument_parser(parser):
     parser_get_subscription = subparsers.add_parser("get")
     parser_get_subscription.add_argument("-u", "--user", help="the username of the user to get the subscription for")
     parser_get_subscription.set_defaults(func=get_subscription)
+
+    # Displays the help for this module.
+    parser_show_help = subparsers.add_parser("help")
+    parser_show_help.set_defaults(func=display_module_help)
