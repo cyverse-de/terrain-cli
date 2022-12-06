@@ -38,8 +38,6 @@ def get_subscription(args):
     user = args.user
     if user is not None:
         auth_user = jwt.get_username(client.get_access_token(args.env))
-        print("User:", user)
-        print("Autnenticated User:", auth_user)
         if auth_user != user:
             display_subscription(client.admin_get_subscription(args.env, user))
             return
