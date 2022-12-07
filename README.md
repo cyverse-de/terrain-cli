@@ -2,7 +2,23 @@
 
 Command-Line interface for the CyVerse Terrain API.
 
-## Getting Help
+## Using Docker
+
+This utility is available in CyVerse's image repository: `harbor.cyverse.org/de/terrain-cli:0.0.1`. When you launch this
+container, it will display a shell prompt where you can run commands interactively:
+
+```
+root@d8440e584e6b:/# terrain help
+
+The following subcommands are available:
+
+    help: list available subcommands
+    subscriptions: subscription operations (subscription,sub,subs)
+```
+
+## Usage
+
+### Getting Help
 
 Aliases: `help`
 
@@ -17,14 +33,14 @@ The following subcommands are available:
     subscriptions: subscription operations (subscription,sub,subs)
 ```
 
-## Subscriptions
+### Subscriptions
 
 Aliases: `subscriptions`, `subscription`, `sub`, `subs`
 
 The subscriptions subcommand provides a command-line interface to API endpoints that can query and update subscription
 information.
 
-### List Plans
+#### List Plans
 
 Aliases: `list-plans`, `plans`, `lp`
 
@@ -46,7 +62,7 @@ Commercial:
     data.size: 5497558138880.0
 ```
 
-### Get Subscription
+#### Get Subscription
 
 Aliases: `get`
 
@@ -82,7 +98,7 @@ Usages:
     data.size: 2992226992.0
 ```
 
-### Add Subscription
+#### Add Subscription
 
 Aliases: `add`
 
@@ -101,7 +117,7 @@ Quotas:
 Usages:
 ```
 
-### Getting Subscription Help
+#### Getting Subscription Help
 
 Aliases: `help`
 
