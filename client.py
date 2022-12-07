@@ -131,3 +131,12 @@ def admin_get_subscription(environment, username):
     r = requests.get(uri, headers=add_auth_header(environment, {}))
     r.raise_for_status()
     return r.json()["result"]
+
+def admin_add_subscription(environment, username, plan):
+    """
+    Subscribes a user to a plan.
+    """
+    uri = terrain_uri(environment, "/admin/qms/users/{0}/plan/{1}".format(username, plan))
+    r = requests.put(uri, headers=add_auth_header(environment, {}))
+    r.raise_for_status()
+    return r.json()

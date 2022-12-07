@@ -46,6 +46,16 @@ def get_subscription(args):
             return
     display_subscription(client.get_subscription(args.env))
 
+def add_subscription(args):
+    """
+    Subscribes a user to a subscription plan. The subscription starts when the command is issued and ends after one
+    year. Administrative access is required to use this subcommand.
+    """
+    user = args.user
+    plan = args.plan
+    client.admin_add_subscription(args.env, user, plan)
+    display_subscription(client.admin_get_subscription(args.env, user))
+
 def list_module_subcommands():
     """
     Returns a list of subcommands that are used to access thismodule.
@@ -76,7 +86,12 @@ def display_module_help(args):
     print("Summarizes each of the available CyVerse subscription plans.")
     print()
     print(prog, args.command, "get")
+    print(prog, args.command, "get --user username")
     print(prog, args.command, "get -u username")
+    print()
+    print("options:")
+    print("  --user username, -u username")
+    print("                        the username of the user to get subscription informaton for")
     print()
     print("Gets information about the current subscription. If the username is not provided")
     print("or happens to be the username of the currently authenticated user then admin")
@@ -86,6 +101,19 @@ def display_module_help(args):
     print("user then admin access is required. If the authenticated user has admin access then")
     print("information about the currently active subscription of the specified user will be")
     print("displayed.")
+    print()
+    print(prog, args.command, "add --user username --plan plan")
+    print(prog, args.command, "add -u username -p plan")
+    print()
+    print("options:")
+    print("  --user usermame, -u username")
+    print("                        the username of the user to create the subscription for")
+    print("  --plan plan_name, -p plan_name")
+    print("                        the name of the plan to subscribe the user to")
+    print()
+    print("Subscribes a user to a plan. The plan will be effective as of the time the command")
+    print("is processed, and it will expire after one year. Admin accessis is required to use")
+    print("this command.")
     print()
     print(prog, args.command, "help")
     print()
@@ -103,8 +131,14 @@ def config_argument_parser(parser):
 
     # Displays the current subscription for a user.
     parser_get_subscription = subparsers.add_parser("get")
-    parser_get_subscription.add_argument("-u", "--user", help="the username of the user to get the subscription for")
+    parser_get_subscription.add_argument("-u", "--user")
     parser_get_subscription.set_defaults(func=get_subscription)
+
+    # Creates a new subscription for a user.
+    parser_add_subscription = subparsers.add_parser("add")
+    parser_add_subscription.add_argument("-u", "--user", required=True)
+    parser_add_subscription.add_argument("-p", "--plan", required=True)
+    parser_add_subscription.set_defaults(func=add_subscription)
 
     # Displays the help for this module.
     parser_show_help = subparsers.add_parser("help")
