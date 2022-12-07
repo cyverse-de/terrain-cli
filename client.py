@@ -140,3 +140,26 @@ def admin_add_subscription(environment, username, plan):
     r = requests.put(uri, headers=add_auth_header(environment, {}))
     r.raise_for_status()
     return r.json()
+
+def is_valid_username(environment, username):
+    """
+    Determines whether or not the provided username is valid.
+    """
+    uri = terrain_uri(environment, "/subjects")
+    payload = {"search": username}
+    r = requests.get(uri, headers=add_auth_header(environment, {}), params=payload)
+    r.raise_for_status()
+    for subject in r.json()["subjects"]:
+        if subject["id"] == username:
+            return True
+    return False
+
+def validate_plan_name(environment, plan_name):
+    """
+    Determines whether or not the provided plan name is valid.
+    """
+    plans = list_plans(environment)
+    for plan in plans:
+        if plan["name"].lower() == plan_name.lower():
+            return plan["name"]
+    return None

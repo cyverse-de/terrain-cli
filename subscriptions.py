@@ -42,6 +42,9 @@ def get_subscription(args):
     if user is not None:
         auth_user = jwt.get_username(client.get_access_token(args.env))
         if auth_user != user:
+            if not client.is_valid_username(args.env, user):
+                print("user does not exist:", user, file=sys.stderr)
+                return
             display_subscription(client.admin_get_subscription(args.env, user))
             return
     display_subscription(client.get_subscription(args.env))
@@ -52,7 +55,13 @@ def add_subscription(args):
     year. Administrative access is required to use this subcommand.
     """
     user = args.user
-    plan = args.plan
+    if not client.is_valid_username(args.env, user):
+        print("user does not exist:", user, file=sys.stderr)
+        sys.exit(1)
+    plan = client.validate_plan_name(args.env, args.plan)
+    if plan is None:
+        print("plan does not exist:", args.plan, file=sys.stderr)
+        sys.exit(1)
     client.admin_add_subscription(args.env, user, plan)
     display_subscription(client.admin_get_subscription(args.env, user))
 
