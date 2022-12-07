@@ -44,7 +44,7 @@ def terrain_auth_file(environment):
 
 def get_cached_access_token(environment):
     """
-    Attempts to obtain the access token from $HOME/.terrain-auth-{environment}.
+    Attempts to obtain the access token from $HOME/.terrain-{environment}.
     """
     token = None
     auth_file = terrain_auth_file(environment)
@@ -79,7 +79,7 @@ def authenticate(environment):
 
 def cache_token(environment, token):
     """
-    Stores a copy of the access token in $HOME/.terrain-auth-{environment}.
+    Stores a copy of the access token in $HOME/.terrain-{environment}.
     """
     auth_file = terrain_auth_file(environment)
     with open(auth_file, "w") as f:
@@ -88,7 +88,7 @@ def cache_token(environment, token):
 
 def get_access_token(environment):
     """
-    Gets the access token to use for Terrain. The access token will be cached in $HOME/.terrain-auth-{environment}. If
+    Gets the access token to use for Terrain. The access token will be cached in $HOME/.terrain-{environment}. If
     the file exists and contains an active access token then that token will be used. Otherwise, the user will be
     prompted to log in.
     """
