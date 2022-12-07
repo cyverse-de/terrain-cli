@@ -1,0 +1,8 @@
+FROM harbor.cyverse.org/vice/cli/bash:latest
+
+COPY . /opt/terrain/
+
+USER root
+RUN python3 -m pip install -r /opt/terrain/requirements.txt \
+    && ln -s /opt/terrain/terrain.py /usr/bin/terrain
+USER user
