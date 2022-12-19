@@ -9,8 +9,17 @@ def extract_payload(token):
     """
     Extracts the payload from a JWT.
     """
-    payload = token.split(".", 3)[1] if token is not None else ""
+    payload = token.split(".", 3)[1] + '==' if token is not None else ""
     return json.loads(base64.b64decode(payload)) if payload != "" else None
+
+def get_username(token):
+    """
+    Returns the username of the authenticated user.
+    """
+    if token is None or token == "":
+        return None
+    payload = extract_payload(token)
+    return payload["preferred_username"] if "preferred_username" in payload else None
 
 def valid(token):
     """
