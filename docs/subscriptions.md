@@ -1,10 +1,14 @@
 # Subscriptions
 
+Aliases: `subscriptions`, `subscription`, `sub`, `subs`
+
 The subscriptions subcommand is used to check and manage user subscriptions. This subcommand has the following aliases:
 `subscriptions`, `subscription`, `subs`, `sub`. All of these aliases are equivalent; feel free to use whichever feels
 the most natural.
 
 ## Listing Plans
+
+Aliases: `list-plans`, `plans`, `lp`
 
 In order to create a subscription, it's necessary to know which subscription plans are available. The `list-plans`
 subcommand (a.k.a. `plans`, `lp`) will display information about each of the avialble plans:
@@ -29,6 +33,8 @@ The output contains the list of plan names along with the quotas associated with
 
 ## Listing Resource Types
 
+Aliases: `list-resource-types`, `resource-types`, `lrt`, `rt`
+
 The resource types are fairly self-explanatory, but there's no guarantee that each subscription plan will have a quota
 for every available resource type. To get a complete list of resource types, you can use the `list-resource-types`
 (a.k.a. `resource-types`, `lrt`, `rt`) subcommand:
@@ -43,6 +49,8 @@ Each line in the output of this subcommand contains the resource type name follo
 used by the resource type.
 
 ## Displaying the Current Subscription
+
+Aliases: `get`
 
 If you want to display information about a user's current subscription plan, you can use the `get` subcommand. This
 command comes in two flavors. Anyone can get information about their own subscription like this:
@@ -83,6 +91,8 @@ user does not exist: idonotexist
 
 ## Adding Subscriptions
 
+Aliases: `add`
+
 Administrators have the ability to create new subscription plans for users using the `add` subcommand:
 
 ```
@@ -120,6 +130,8 @@ Terrain API Client subscriptions add: error: the following arguments are require
 ```
 
 ## Setting Quotas
+
+Aliases: `set-quota`
 
 Administrators have the ability to set a user's quota to a different value using the `set-quota` subcommand:
 
@@ -177,6 +189,8 @@ The `--user`, `--resource-type` and `--quota` arguments are also all required, m
 their own quotas but they must specify their own usernames using the `--user` argument to do so.
 
 ## Getting Help
+
+Aliases: `help`
 
 To get a brief usage summary for this subcommand, you can so this:
 
