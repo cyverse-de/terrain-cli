@@ -147,7 +147,7 @@ Usages:
     data.size: 9165.0
 ```
 
-The quota can be specified as a raw number above or using one of the following modifiers:
+The quota can be specified as a raw number (as in the example above) or using one of the following modifiers:
 
 | Modifier     | Value      |
 | ------------ | ---------- |
