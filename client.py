@@ -114,6 +114,15 @@ def list_plans(environment):
     r.raise_for_status()
     return r.json()["result"]
 
+def list_resource_types(environment):
+    """
+    Returns the list of available resource types.
+    """
+    uri = terrain_uri(environment, "/qms/resource-types")
+    r = requests.get(uri, headers=add_auth_header(environment, {}))
+    r.raise_for_status()
+    return r.json()["result"]
+
 def get_subscription(environment):
     """
     Returns the currently active subscription for the authenticated user.
@@ -141,6 +150,16 @@ def admin_add_subscription(environment, username, plan):
     r.raise_for_status()
     return r.json()
 
+def admin_set_quota(environment, username, resource_type, quota):
+    """
+    Sets the quota associated with a resuource type in the user's current subscription.
+    """
+    uri = terrain_uri(environment, "/admin/qms/users/{0}/plan/{1}/quota".format(username, resource_type))
+    payload = {"quota": quota}
+    r = requests.post(uri, headers=add_auth_header(environment, {}), json=payload)
+    r.raise_for_status()
+    return r.json()["result"]
+
 def is_valid_username(environment, username):
     """
     Determines whether or not the provided username is valid.
@@ -162,4 +181,14 @@ def validate_plan_name(environment, plan_name):
     for plan in plans:
         if plan["name"].lower() == plan_name.lower():
             return plan["name"]
+    return None
+
+def validate_resource_type_name(environment, resource_type_name):
+    """
+    Determines whether or not the provided resource type name is valid.
+    """
+    resource_types = list_resource_types(environment)
+    for resource_type in resource_types:
+        if resource_type["name"].lower() == resource_type_name.lower():
+            return resource_type["name"]
     return None
