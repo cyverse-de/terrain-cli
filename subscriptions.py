@@ -11,13 +11,9 @@ import sys
 conversions = {
     "": 1,
     "K": 2**10,
-    "k": 2**10,
     "M": 2**20,
-    "m": 2**20,
     "G": 2**30,
-    "g": 2**30,
     "T": 2**40,
-    "t": 2**40,
 }
 
 def list_plans(args):
@@ -97,6 +93,7 @@ def convert_quota(spec):
     if m is None:
         return None
     conversion = m.group(2) or ""
+    conversion = conversion.upper()
     if conversion not in conversions:
         return None
     return int(float(m.group(1)) * conversions[conversion])
